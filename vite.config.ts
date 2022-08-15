@@ -9,6 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Markdown from 'vite-plugin-vue-markdown'
 import { VitePWA } from 'vite-plugin-pwa'
 import Inspect from 'vite-plugin-inspect'
+import Icons from 'unplugin-icons/vite'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
@@ -119,6 +120,9 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-inspect
     // Visit http://localhost:3333/__inspect/ to see the inspector
     Inspect(),
+
+    // https://github.com/antfu/unplugin-icons
+    Icons(),
   ],
 
   // https://github.com/vitest-dev/vitest
