@@ -22,5 +22,6 @@ useHead({
 </script>
 
 <template>
+  <NavBar />
   <RouterView />
 </template>
