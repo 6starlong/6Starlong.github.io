@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Footer: typeof import('./components/Footer.vue')['default']
+    ListPosts: typeof import('./components/ListPosts.vue')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

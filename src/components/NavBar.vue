@@ -3,10 +3,11 @@ import { isDark } from '~/composables/dark'
 
 const store = useStore()
 const route = useRoute()
-const isHome = computed(() => route.path === '/')
 
 const { y } = useWindowScroll()
 const { height } = useWindowSize()
+
+const isHome = computed(() => route.meta.layout === 'home')
 const isDarkImg = computed(() =>
   (isHome.value && (y.value <= height.value * store.heroHeight - 55)) || isDark.value,
 )

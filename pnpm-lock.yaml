@@ -14,6 +14,7 @@ specifiers:
   cypress: ^10.4.0
   eslint: ^8.21.0
   eslint-plugin-cypress: ^2.12.1
+  gray-matter: ^4.0.3
   https-localhost: ^4.7.1
   markdown-it-link-attributes: ^4.0.0
   markdown-it-shiki: ^0.5.1
@@ -62,6 +63,7 @@ devDependencies:
   cypress: 10.4.0
   eslint: 8.21.0
   eslint-plugin-cypress: 2.12.1_eslint@8.21.0
+  gray-matter: 4.0.3
   https-localhost: 4.7.1
   markdown-it-link-attributes: 4.0.0
   markdown-it-shiki: 0.5.1

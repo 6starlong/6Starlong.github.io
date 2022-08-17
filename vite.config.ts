@@ -1,4 +1,5 @@
-import path from 'path'
+import fs from 'fs'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
@@ -13,11 +14,12 @@ import Icons from 'unplugin-icons/vite'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
+import matter from 'gray-matter'
 
 export default defineConfig({
   resolve: {
     alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`,
+      '~/': `${resolve(__dirname, 'src')}/`,
     },
   },
 
@@ -31,6 +33,15 @@ export default defineConfig({
     Pages({
       extensions: ['vue', 'md'],
       pagesDir: 'pages',
+      extendRoute(route) {
+        const path = resolve(__dirname, route.component.slice(1))
+
+        const md = fs.readFileSync(path, 'utf-8')
+        const { data } = matter(md)
+        route.meta = Object.assign(route.meta || {}, { frontmatter: data })
+
+        return route
+      },
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
