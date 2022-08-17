@@ -22,6 +22,7 @@ const { isLoading } = useImage({ src: heroUrl })
   </section>
   <!-- TODO: 最新更新的posts -->
   <!-- TODO: 每日 -->
+  <README />
   <!-- eslint-disable-next-line vue/no-constant-condition -->
   <div v-if="false" h-200vh px-4 py-10>
     <p>
