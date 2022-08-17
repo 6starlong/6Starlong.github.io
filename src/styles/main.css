@@ -8,9 +8,17 @@ body,
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html.dark {
   background: #121212;
   color-scheme: dark;
+}
+
+#app{
+  position: relative;
 }
 
 #nprogress {

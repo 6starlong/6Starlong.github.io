@@ -2,18 +2,28 @@
 const user = useUserStore()
 const name = $ref(user.savedName)
 
+const store = useStore()
 const router = useRouter()
 const go = () => {
   if (name)
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
+
+const heroUrl = 'https://w.wallhaven.cc/full/6o/wallhaven-6ozkzl.jpg'
+const { isLoading } = useImage({ src: heroUrl })
 </script>
 
 <template>
-  <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
+  <section :style="{ height: `${store.heroHeight * 100}vh` }">
+    <div v-if="isLoading" w-full h-full class="flex justify-center items-center">
+      <div i-line-md:loading-loop text-3xl />
     </div>
+    <img v-else :src="heroUrl" alt="hero-img" w-full h-full object-cover>
+  </section>
+  <!-- TODO: 最新更新的posts -->
+  <!-- TODO: 每日 -->
+  <!-- eslint-disable-next-line vue/no-constant-condition -->
+  <div v-if="false" h-200vh px-4 py-10>
     <p>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
         Vitesse

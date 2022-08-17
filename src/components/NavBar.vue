@@ -1,16 +1,30 @@
 <script setup lang="ts">
 import { isDark } from '~/composables/dark'
+
+const store = useStore()
+const route = useRoute()
+const isHome = computed(() => route.path === '/')
+
+const { y } = useWindowScroll()
+const { height } = useWindowSize()
+const isDarkImg = computed(() =>
+  (isHome.value && (y.value <= height.value * store.heroHeight - 55)) || isDark.value,
+)
+
+const iconColor = computed(() => isHome.value ? '#fff' : 'inherit')
+const backTop = () => window.scrollTo(0, 0)
 </script>
 
 <template>
-  <header class="header z-40">
+  <header class="header z-40" :class="isHome && 'absolute top-0 left-0 right-0'">
     <RouterLink
       class="w-10 h-10 absolute lg:fixed m-6 select-none outline-none"
       to="/"
       focusable="false"
+      @click="backTop"
     >
-      <img v-show="isDark" src="/favicon-dark.svg?url" alt="logo">
-      <img v-show="!isDark" src="/favicon.svg?url" alt="logo">
+      <img v-show="isDarkImg" src="/favicon-dark.svg?url" alt="logo">
+      <img v-show="!isDarkImg" src="/favicon.svg?url" alt="logo">
     </RouterLink>
     <nav class="nav">
       <div class="spacer" />
@@ -76,7 +90,7 @@ import { isDark } from '~/composables/dark'
 .nav button {
   cursor: pointer;
   text-decoration: none;
-  color: inherit;
+  color: v-bind(iconColor);
   transition: opacity 0.2s ease;
   opacity: 0.6;
   outline: none;
