@@ -32,9 +32,9 @@ const posts = computed(() => (props.posts || routes))
               :class="idx ? `bg-[url(https://p0.meituan.net/csc/a36a11f29ac67842a71b2fcd4c41291b530265.jpg)]` : 'bg-[url(https://p0.meituan.net/csc/4f2840d18a3f0c52638fc4d0af10f61a635711.jpg)]'"
             >
               <div class="p-8 w-full h-full justify-center items-center text-center" flex="~ col">
-                <h2 class="my-3 text-white">
+                <div class="my-3 text-25px text-#fff font-bold">
                   {{ route.title }}
-                </h2>
+                </div>
                 <div class="text-#fbf8f5 leading-none">
                   {{ route.date }}
                 </div>

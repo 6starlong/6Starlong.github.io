@@ -1,7 +1,6 @@
 <template>
-  <div class="pt-10 pb-6 prose m-auto opacity-50 flex">
-    <span class="text-sm">
-      2022-PRESENT © Powered by Sᴛᴀʀʟᴏɴɢ☕</span>
+  <div class="prose mt-10 mb-6 m-auto opacity-50 flex">
+    <span class="font-mono text-sm"> 2022-PRESENT © Powered by Sᴛᴀʀʟᴏɴɢ☕</span>
     <div class="flex-auto" />
   </div>
 </template>
