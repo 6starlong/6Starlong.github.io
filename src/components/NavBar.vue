@@ -12,8 +12,15 @@ const isDarkImg = computed(() =>
   (isHome.value && (y.value <= height.value * store.heroHeight - 55)) || isDark.value,
 )
 
+const navList = [
+  { title: 'Blog', path: '/posts', icon: 'i-ri:article-line' },
+  { title: 'Notes', path: '/notes', icon: 'i-ri-sticky-note-line' },
+  { title: 'Stars', path: '/stars', icon: 'i-ri-heart-line' },
+  { title: 'Demos', path: '/demos', icon: 'i-ri-screenshot-line' },
+  { title: 'About', path: '/about', icon: 'i-ri:code-s-slash-fill' },
+]
+
 const iconColor = computed(() => isHome.value ? '#fff' : 'inherit')
-const backTop = () => window.scrollTo(0, 0)
 </script>
 
 <template>
@@ -22,7 +29,6 @@ const backTop = () => window.scrollTo(0, 0)
       class="w-10 h-10 absolute lg:fixed m-6 select-none outline-none"
       to="/"
       focusable="false"
-      @click="backTop"
     >
       <img v-show="isDarkImg" src="/favicon-dark.svg?url" alt="logo">
       <img v-show="!isDarkImg" src="/favicon.svg?url" alt="logo">
@@ -30,33 +36,16 @@ const backTop = () => window.scrollTo(0, 0)
     <nav class="nav">
       <div class="spacer" />
       <div class="right">
-        <RouterLink to="/posts" title="Blog">
-          <span class="lt-md:hidden">Blog</span>
-          <div i-ri:article-line md:hidden />
-        </RouterLink>
-        <RouterLink to="/notes" title="Notes">
-          <span class="lt-md:hidden">Notes</span>
-          <div i-ri-sticky-note-line md:hidden />
-        </RouterLink>
-        <RouterLink to="/stars" title="stars">
-          <span class="lt-md:hidden">Stars</span>
-          <div i-ri-heart-line md:hidden />
-        </RouterLink>
-        <RouterLink to="/demos" title="Demos">
-          <span class="lt-md:hidden">Demos</span>
-          <div i-ri-screenshot-line md:hidden />
-        </RouterLink>
-        <RouterLink to="/talks" class="lt-md:hidden" title="Talks">
-          Talks
-        </RouterLink>
-        <RouterLink class="icon-btn mx-2" to="/about" title="关于">
-          <span class="lt-md:hidden">About</span>
-          <div i-carbon-dicom-overlay md:hidden />
-        </RouterLink>
+        <template v-for="item in navList" :key="item.path">
+          <RouterLink :to="item.path" :title="item.title">
+            <span class="lt-md:hidden">{{ item.title }}</span>
+            <div :class="item.icon" md:hidden />
+          </RouterLink>
+        </template>
 
-        <button title="切换深色模式" @click="toggleDark()">
+        <a title="切换深色模式" @click="toggleDark()">
           <div i="carbon-sun dark:carbon-moon" />
-        </button>
+        </a>
         <a href="https://github.com/6starlong" target="_blank" title="GitHub" class="lt-md:hidden">
           <div i-uil-github-alt />
         </a>
@@ -66,38 +55,19 @@ const backTop = () => window.scrollTo(0, 0)
 </template>
 
 <style scoped>
-.header h1 {
-  margin-bottom: 0;
-}
-.logo {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-}
 .nav {
   padding: 2rem;
-  width: 100%;
   display: grid;
   grid-template-columns: auto max-content;
-  box-sizing: border-box;
 }
-.nav > * {
-  margin: auto;
-}
-.nav img {
-  margin-bottom: 0;
-}
-.nav a,
-.nav button {
+.nav a {
   cursor: pointer;
-  text-decoration: none;
   color: v-bind(iconColor);
   transition: opacity 0.2s ease;
   opacity: 0.6;
-  outline: none;
 }
 .nav a:hover,
-.nav button:hover {
+a.router-link-active {
   opacity: 1;
   text-decoration-color: inherit;
 }
@@ -106,8 +76,5 @@ const backTop = () => window.scrollTo(0, 0)
   grid-gap: 1.2rem;
   grid-auto-flow: column;
   padding-left: 2rem;
-}
-.nav .right > * {
-  margin: auto;
 }
 </style>
