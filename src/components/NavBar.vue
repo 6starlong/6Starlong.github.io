@@ -24,9 +24,9 @@ const iconColor = computed(() => isHome.value ? '#fff' : 'inherit')
 </script>
 
 <template>
-  <header class="header z-40" :class="isHome && 'absolute top-0 left-0 right-0'">
+  <header class="header" :class="isHome && 'absolute top-0 left-0 right-0'">
     <RouterLink
-      class="w-10 h-10 absolute lg:fixed m-6 select-none outline-none"
+      class="logo w-10 h-10 absolute lg:fixed m-6 select-none outline-none"
       to="/"
       focusable="false"
     >
@@ -37,7 +37,7 @@ const iconColor = computed(() => isHome.value ? '#fff' : 'inherit')
       <div class="spacer" />
       <div class="right">
         <template v-for="item in navList" :key="item.path">
-          <RouterLink :to="item.path" :title="item.title">
+          <RouterLink :to="item.path" :title="item.title" :class="route.path.includes(item.path) && 'router-link-active'">
             <span class="lt-md:hidden">{{ item.title }}</span>
             <div :class="item.icon" md:hidden />
           </RouterLink>
@@ -55,6 +55,21 @@ const iconColor = computed(() => isHome.value ? '#fff' : 'inherit')
 </template>
 
 <style scoped>
+@media (max-width: 960px) {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background-color: var(--c-bg);
+    border-bottom: 1px solid rgba(125, 125, 125, 0.3);
+  }
+  .header .logo {
+    margin: 0.75rem;
+  }
+  .header .nav {
+    padding: 1.25rem;
+  }
+}
 .nav {
   padding: 2rem;
   display: grid;
