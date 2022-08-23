@@ -1,6 +1,6 @@
 <template>
-  <main class="px-7 py-10">
+  <div class="px-7 py-10">
     <RouterView />
     <Footer />
-  </main>
+  </div>
 </template>

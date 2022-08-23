@@ -17,7 +17,7 @@ export default defineConfig({
     presetUno(),
     presetAttributify(),
     presetIcons({
-      scale: 1.2,
+      scale: 1.25,
       warn: true,
     }),
     presetWebFonts({
@@ -32,4 +32,6 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
+
+  safelist: ['i-ri:article-line', 'i-ri-sticky-note-line', 'i-ri-heart-line', 'i-ri-screenshot-line', 'i-ri:code-s-slash-fill'],
 })

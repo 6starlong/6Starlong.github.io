@@ -1,95 +1,133 @@
 <script setup lang="ts">
-import { isDark } from '~/composables/dark'
-
-const store = useStore()
 const route = useRoute()
-
-const { y } = useWindowScroll()
-const { height } = useWindowSize()
-
-const isHome = computed(() => route.meta.layout === 'home')
-const isDarkImg = computed(() =>
-  (isHome.value && (y.value <= height.value * store.heroHeight - 55)) || isDark.value,
-)
-
-const navList = [
-  { title: 'Blog', path: '/posts', icon: 'i-ri:article-line' },
-  { title: 'Notes', path: '/notes', icon: 'i-ri-sticky-note-line' },
-  { title: 'Stars', path: '/stars', icon: 'i-ri-heart-line' },
-  { title: 'Demos', path: '/demos', icon: 'i-ri-screenshot-line' },
-  { title: 'About', path: '/about', icon: 'i-ri:code-s-slash-fill' },
-]
-
-const iconColor = computed(() => isHome.value ? '#fff' : 'inherit')
+const store = useStore()
+const { title, avatar, nav, isOpenSidebar: open } = $(store)
 </script>
 
 <template>
-  <header class="header" :class="isHome && 'absolute top-0 left-0 right-0'">
-    <RouterLink
-      class="logo w-10 h-10 absolute lg:fixed m-6 select-none outline-none"
-      to="/"
-      focusable="false"
-    >
-      <img v-show="isDarkImg" src="/favicon-dark.svg?url" alt="logo">
-      <img v-show="!isDarkImg" src="/favicon.svg?url" alt="logo">
+  <header
+    class="header"
+    :class="[{ 'cover': route.meta.layout === 'home', 'is-open': open }, $attrs.class]"
+  >
+    <RouterLink class="pl-5 flex items-center hover:!op-60 transition-opacity-250 shrink-0" to="/">
+      <img :src="avatar" alt="avatar" class="w-8 h-8 rounded-1/2 lg:fixed">
+      <span class="pl-2 lg:pl-10 font-600" :title="title">{{ title }}</span>
     </RouterLink>
-    <nav class="nav">
-      <div class="spacer" />
-      <div class="right">
-        <template v-for="item in navList" :key="item.path">
-          <RouterLink :to="item.path" :title="item.title" :class="route.path.includes(item.path) && 'router-link-active'">
-            <span class="lt-md:hidden">{{ item.title }}</span>
-            <div :class="item.icon" md:hidden />
-          </RouterLink>
-        </template>
 
-        <a title="切换深色模式" @click="toggleDark()">
-          <div i="carbon-sun dark:carbon-moon" />
-        </a>
-        <a href="https://github.com/6starlong" target="_blank" title="GitHub" class="lt-md:hidden">
-          <div i-uil-github-alt />
-        </a>
-      </div>
+    <nav class="nav">
+      <template v-for="item in nav" :key="item.path">
+        <RouterLink
+          :to="item.path" :title="item.title"
+          :class="route.path.includes(item.path) && 'router-link-active'"
+        >
+          <span class="lt-lg:hidden">{{ item.title }}</span>
+          <div :class="item.icon" lg:hidden />
+        </RouterLink>
+      </template>
+
+      <a class="cursor-pointer" title="切换深色模式" @click="toggleDark()">
+        <div i="carbon-sun dark:carbon-moon" />
+      </a>
+      <a href="https://github.com/6starlong" target="_blank" title="GitHub">
+        <div i-uil-github-alt />
+      </a>
     </nav>
   </header>
+
+  <div class="nav-hamburger" :class="{ 'is-open': open }">
+    <div class="hamburger" :class="{ 'is-open': open }" @click="open = !open">
+      <div />
+    </div>
+  </div>
 </template>
 
 <style scoped>
-@media (max-width: 960px) {
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 60;
-    background-color: var(--c-bg);
-    border-bottom: 1px solid rgba(125, 125, 125, 0.3);
-  }
-  .header .logo {
-    margin: 0.75rem;
-  }
-  .header .nav {
-    padding: 1.25rem;
-  }
+.header{
+  --at-apply: lt-md:h-[55px] lt-md:bg-[var(--c-bg)];
+  --at-apply: w-full h-[88px] z-40 flex justify-between;
+  transition: background-color 0.25s, height 0.25s, transform .5s;
 }
+
+.header.cover{
+  --at-apply: absolute md:text-gray-200;
+}
+
 .nav {
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: auto max-content;
+  --at-apply: lt-md:hidden p-8 gap-5;
+  --at-apply: grid grid-flow-col items-center
 }
+
 .nav a {
-  cursor: pointer;
-  color: v-bind(iconColor);
-  transition: opacity 0.2s ease;
-  opacity: 0.6;
+  --at-apply: op-60 transition-opacity-250;
 }
+
 .nav a:hover,
 a.router-link-active {
-  opacity: 1;
-  text-decoration-color: inherit;
+  --at-apply: op-100;
 }
-.nav .right {
-  display: grid;
-  grid-gap: 1.2rem;
-  grid-auto-flow: column;
-  padding-left: 2rem;
+
+.nav-hamburger {
+  --at-apply: md:hidden absolute top-0 right-0 z-60 w-[55px] h-[55px];
+  --at-apply: flex justify-center items-center transition-right-500;
+}
+
+.nav-hamburger.is-open {
+  --at-apply: fixed right-[var(--sidebar-width)];
+}
+
+.hamburger {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.hamburger div,
+.hamburger div:before,
+.hamburger div:after{
+  width: 20px;
+  height: 2px;
+  border-radius: 5px;
+  transition: all 0.15s linear;
+  --at-apply: bg-gray-700 dark:bg-gray-200;
+}
+
+.hamburger div:before,
+.hamburger div:after {
+  content: "";
+  position: absolute;
+}
+
+.hamburger div:before {
+  transform: translateY(-300%);
+}
+
+.hamburger div:after {
+  transform: translateY(300%);
+}
+
+.hamburger.is-open div {
+  background: transparent;
+}
+
+.hamburger.is-open div:before {
+  transform: rotate(45deg);
+}
+
+.hamburger.is-open div:after {
+  transform: rotate(-45deg);
+}
+
+.hamburger.is-open {
+  background-color: var(--c-bg);
+  transition: all 0.35s;
+}
+
+.hamburger.is-open:hover {
+  transform: rotate(90deg);
 }
 </style>

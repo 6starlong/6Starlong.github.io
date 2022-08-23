@@ -1,6 +1,6 @@
 <template>
-  <main class="pb-10">
+  <div class="pb-10">
     <RouterView />
     <Footer />
-  </main>
+  </div>
 </template>

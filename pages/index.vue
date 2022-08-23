@@ -2,7 +2,6 @@
 const user = useUserStore()
 const name = $ref(user.savedName)
 
-const store = useStore()
 const router = useRouter()
 const go = () => {
   if (name)
@@ -14,7 +13,7 @@ const { isLoading } = useImage({ src: heroUrl })
 </script>
 
 <template>
-  <section :style="{ height: `${store.heroHeight * 100}vh` }">
+  <section :style="{ height: 'var(--hero-height)' }">
     <div v-if="isLoading" w-full h-full class="flex justify-center items-center">
       <div i-line-md:loading-loop text-3xl />
     </div>

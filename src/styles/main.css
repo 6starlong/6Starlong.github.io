@@ -2,6 +2,11 @@
 @import "./markdown.css";
 
 :root {
+  --sidebar-width: 160px;
+  --hero-height: 75vh;
+}
+
+:root {
   --c-bg: #fff;
   --c-scrollbar: #eee;
   --c-scrollbar-hover: #bbb;
