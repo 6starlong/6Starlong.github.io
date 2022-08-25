@@ -10,9 +10,14 @@ export const useStore = defineStore('main', () => {
     { title: 'Demos', path: '/demos', icon: 'i-ri-screenshot-line' },
     { title: 'About', path: '/about', icon: 'i-ri:code-s-slash-fill' },
   ]
-  const isOpenSidebar = false
 
-  return { title, avatar, nav, isOpenSidebar }
+  const isSidebarOpen = ref(false)
+  function toggleSidebar() {
+    isSidebarOpen.value = !isSidebarOpen.value
+    toggleLock()
+  }
+
+  return { title, avatar, nav, isSidebarOpen, toggleSidebar }
 })
 
 if (import.meta.hot)

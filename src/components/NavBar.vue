@@ -1,60 +1,61 @@
 <script setup lang="ts">
 const route = useRoute()
 const store = useStore()
-const { title, avatar, nav, isOpenSidebar: open } = $(store)
+const { title, avatar, nav, isSidebarOpen: open, toggleSidebar } = $(store)
 </script>
 
 <template>
-  <header
-    class="header"
-    :class="[{ 'cover': route.meta.layout === 'home', 'is-open': open }, $attrs.class]"
-  >
-    <RouterLink class="pl-5 flex items-center hover:!op-60 transition-opacity-250 shrink-0" to="/">
-      <img :src="avatar" alt="avatar" class="w-8 h-8 rounded-1/2 lg:fixed">
-      <span class="pl-2 lg:pl-10 font-600" :title="title">{{ title }}</span>
-    </RouterLink>
+  <header class="header" :class="{ 'is-cover': route.meta.layout === 'home' }">
+    <div class="container" :class="{ 'is-open': open }">
+      <router-link class="flex items-center hover:!op-60 transition-opacity-250 shrink-0" to="/">
+        <img :src="avatar" class="w-8 h-8 rounded-1/2 lg:fixed">
+        <span class="pl-2 lg:pl-10 font-600" :title="title">{{ title }}</span>
+      </router-link>
 
-    <nav class="nav">
-      <template v-for="item in nav" :key="item.path">
-        <RouterLink
-          :to="item.path" :title="item.title"
-          :class="route.path.includes(item.path) && 'router-link-active'"
-        >
-          <span class="lt-lg:hidden">{{ item.title }}</span>
-          <div :class="item.icon" lg:hidden />
-        </RouterLink>
-      </template>
+      <div class="hamburger" :class="{ 'is-open': open }" @click="toggleSidebar">
+        <div />
+      </div>
 
-      <a class="cursor-pointer" title="切换深色模式" @click="toggleDark()">
-        <div i="carbon-sun dark:carbon-moon" />
-      </a>
-      <a href="https://github.com/6starlong" target="_blank" title="GitHub">
-        <div i-uil-github-alt />
-      </a>
-    </nav>
-  </header>
+      <nav class="nav">
+        <template v-for="item in nav" :key="item.path">
+          <router-link
+            :to="item.path" :title="item.title"
+            :class="route.path.includes(item.path) && 'router-link-active'"
+          >
+            <span class="lt-md:block lt-lg:hidden font-500">{{ item.title }}</span>
+            <div :class="item.icon" lt-md:hidden lg:hidden />
+          </router-link>
+        </template>
 
-  <div class="nav-hamburger" :class="{ 'is-open': open }">
-    <div class="hamburger" :class="{ 'is-open': open }" @click="open = !open">
-      <div />
+        <a class="cursor-pointer" title="切换深色模式" @click="toggleDark()">
+          <div i="carbon-sun dark:carbon-moon" />
+        </a>
+        <a href="https://github.com/6starlong" target="_blank" title="GitHub">
+          <div i-uil-github-alt />
+        </a>
+      </nav>
     </div>
-  </div>
+
+    <transition>
+      <div v-if="open" class="backdrop v-enter-active" @click="toggleSidebar" />
+    </transition>
+  </header>
 </template>
 
 <style scoped>
-.header{
-  --at-apply: lt-md:h-[55px] lt-md:bg-[var(--c-bg)];
-  --at-apply: w-full h-[88px] z-40 flex justify-between;
-  transition: background-color 0.25s, height 0.25s, transform .5s;
+.header {
+  --at-apply: relative z-10 w-full h-88px transition-all duration-250;
 }
 
-.header.cover{
-  --at-apply: absolute md:text-gray-200;
+.container {
+  --at-apply: relative right-0 h-full max-w-full pl-5;
+  --at-apply: flex justify-between items-center;
+  --at-apply: transition-right-500 fast-out;
 }
 
 .nav {
-  --at-apply: lt-md:hidden p-8 gap-5;
-  --at-apply: grid grid-flow-col items-center
+  --at-apply: grid grid-flow-col items-center gap-5 p-8;
+  --at-apply: transition-right-500 fast-out;
 }
 
 .nav a {
@@ -66,17 +67,46 @@ a.router-link-active {
   --at-apply: op-100;
 }
 
-.nav-hamburger {
-  --at-apply: md:hidden absolute top-0 right-0 z-60 w-[55px] h-[55px];
-  --at-apply: flex justify-center items-center transition-right-500;
+@media (min-width: 768px) {
+  .header.is-cover {
+    --at-apply: absolute text-gray-200;
+  }
 }
 
-.nav-hamburger.is-open {
-  --at-apply: fixed right-[var(--sidebar-width)];
+@media (max-width: 768px) {
+  .header {
+    height: 55px;
+    background: var(--c-bg);
+  }
+
+  .container {
+    padding-right: 0.5rem;
+  }
+
+  .container.is-open {
+    right: var(--sidebar-width);
+  }
+
+  .is-open .nav {
+    right: 0;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: calc(0px - var(--sidebar-width));
+    z-index: 100;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    background-color: var(--c-bg);
+  }
 }
 
 .hamburger {
   position: relative;
+  z-index: 100;
   width: 2rem;
   height: 2rem;
   display: flex;
@@ -88,7 +118,7 @@ a.router-link-active {
 
 .hamburger div,
 .hamburger div:before,
-.hamburger div:after{
+.hamburger div:after {
   width: 20px;
   height: 2px;
   border-radius: 5px;
@@ -129,5 +159,22 @@ a.router-link-active {
 
 .hamburger.is-open:hover {
   transform: rotate(90deg);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  cursor: pointer;
+  background: rgba(18, 18, 18, 0.6);
+  transition: opacity .5s;
+}
+
+.backdrop,
+.hamburger {
+  --at-apply: md:hidden;
 }
 </style>
