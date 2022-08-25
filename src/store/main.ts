@@ -12,10 +12,7 @@ export const useStore = defineStore('main', () => {
   ]
 
   const isSidebarOpen = ref(false)
-  function toggleSidebar() {
-    isSidebarOpen.value = !isSidebarOpen.value
-    toggleLock()
-  }
+  const toggleSidebar = useToggle(isSidebarOpen)
 
   return { title, avatar, nav, isSidebarOpen, toggleSidebar }
 })

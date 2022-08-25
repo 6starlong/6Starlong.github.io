@@ -2,6 +2,12 @@
 const route = useRoute()
 const store = useStore()
 const { title, avatar, nav, isSidebarOpen: open, toggleSidebar } = $(store)
+
+onMounted(() => {
+  const isLocked = useScrollLock(document.documentElement)
+  const toggleLock = useToggle(isLocked)
+  watch(() => open, () => toggleLock())
+})
 </script>
 
 <template>
@@ -12,7 +18,7 @@ const { title, avatar, nav, isSidebarOpen: open, toggleSidebar } = $(store)
         <span class="pl-2 lg:pl-10 font-600" :title="title">{{ title }}</span>
       </router-link>
 
-      <div class="hamburger" :class="{ 'is-open': open }" @click="toggleSidebar">
+      <div class="hamburger" :class="{ 'is-open': open }" @click="toggleSidebar()">
         <div />
       </div>
 
@@ -37,7 +43,7 @@ const { title, avatar, nav, isSidebarOpen: open, toggleSidebar } = $(store)
     </div>
 
     <transition>
-      <div v-if="open" class="backdrop v-enter-active" @click="toggleSidebar" />
+      <div v-if="open" class="backdrop v-enter-active" @click="toggleSidebar()" />
     </transition>
   </header>
 </template>
