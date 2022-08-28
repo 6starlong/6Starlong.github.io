@@ -19,23 +19,13 @@ useHead({
     },
   ],
 })
-
-const { isSidebarOpen: open } = $(useStore())
 </script>
 
 <template>
   <NavBar />
   <main class="main">
-    <router-view :class="open && 'is-open'" />
+    <router-view />
+    <Footer />
   </main>
 </template>
 
-<style>
-.main > div {
-  --at-apply: transition-transform-500 fast-out;
-}
-
-.main > div.is-open {
-  --at-apply: lt-md:translate-x-[calc(0px-var(--sidebar-width))];
-}
-</style>

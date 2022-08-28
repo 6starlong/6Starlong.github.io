@@ -8,13 +8,14 @@ export const useStore = defineStore('main', () => {
     { title: 'Notes', path: '/notes', icon: 'i-ri-sticky-note-line' },
     { title: 'Stars', path: '/stars', icon: 'i-ri-heart-line' },
     { title: 'Demos', path: '/demos', icon: 'i-ri-screenshot-line' },
-    { title: 'About', path: '/about', icon: 'i-ri:code-s-slash-fill' },
+    { title: 'About', path: '/about', icon: 'i-ri:at-line' },
   ]
 
-  const isSidebarOpen = ref(false)
-  const toggleSidebar = useToggle(isSidebarOpen)
+  const isNavOpen = ref(false)
+  const toggleNavbar = useToggle(isNavOpen)
+  watch(isNavOpen, () => document.body.classList.toggle('nav-open'))
 
-  return { title, avatar, nav, isSidebarOpen, toggleSidebar }
+  return { title, avatar, nav, isNavOpen, toggleNavbar }
 })
 
 if (import.meta.hot)

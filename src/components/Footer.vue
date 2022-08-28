@@ -1,6 +1,12 @@
+<script setup>
+const { title } = useStore()
+</script>
+
 <template>
-  <div class="prose mt-10 mb-6 m-auto opacity-50 flex">
-    <span class="font-mono text-sm"> 2022-PRESENT © Powered by Sᴛᴀʀʟᴏɴɢ☕</span>
-    <div class="flex-auto" />
-  </div>
+  <footer p="6 t-10">
+    <div class="prose m-auto opacity-50 flex">
+      <span class="font-500 text-sm"> 2022-PRESENT © Powered by {{ title }}</span>
+      <div class="flex-auto" />
+    </div>
+  </footer>
 </template>

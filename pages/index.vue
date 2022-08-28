@@ -2,30 +2,31 @@
 const user = useUserStore()
 const name = $ref(user.savedName)
 
+const route = useRoute()
 const router = useRouter()
 const go = () => {
   if (name)
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
-
-const heroUrl = 'https://w.wallhaven.cc/full/6o/wallhaven-6ozkzl.jpg'
+const heroUrl = '/images/hero.jpg'
 const { isLoading } = useImage({ src: heroUrl })
 </script>
 
 <template>
-  <section :style="{ height: 'var(--hero-height)' }">
-    <div v-if="isLoading" w-full h-full class="flex justify-center items-center">
-      <div i-line-md:loading-loop text-3xl />
-    </div>
-    <img v-else :src="heroUrl" alt="hero-img" w-full h-full object-cover>
+  <section v-if="route.meta.layout === 'home'" class="hero">
+    <div v-if="isLoading" i-line-md:loading-loop text-3xl />
+    <template v-else>
+      <img :src="heroUrl" class="absolute inset-0 w-full h-full op-95 object-cover">
+      <div class="relative text-gray-200" />
+    </template>
   </section>
+
+  <README />
+
   <!-- TODO: 最新更新的posts -->
   <!-- TODO: 每日 -->
-  <section class="mt-10">
-    <README />
-  </section>
   <!-- eslint-disable-next-line vue/no-constant-condition -->
-  <div v-if="false" h-200vh px-4 py-10>
+  <div v-if="false" px-4 py-10>
     <p>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
         Vitesse
@@ -70,3 +71,9 @@ const { isLoading } = useImage({ src: heroUrl })
 meta:
   layout: home
 </route>
+
+<style scoped>
+.hero {
+  --at-apply: relative h-screen grid justify-center items-center;
+}
+</style>

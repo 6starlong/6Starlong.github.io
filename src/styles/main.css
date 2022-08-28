@@ -2,8 +2,13 @@
 @import "./markdown.css";
 
 :root {
-  --sidebar-width: 160px;
-  --hero-height: 75vh;
+  --nav-height: 55px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --nav-height: 88px;
+  }
 }
 
 :root {
@@ -17,7 +22,7 @@ html {
 }
 
 html.dark {
-  --c-bg: #050505;
+  --c-bg: #121518;
   --c-scrollbar: #111;
   --c-scrollbar-hover: #222;
   color-scheme: dark;
@@ -74,3 +79,32 @@ html.dark {
 html:not(.dark) [img-dark] {
   display: none;
 }
+
+.header {
+  height: var(--nav-height);
+}
+
+.main {
+  margin-top: var(--nav-height);
+}
+
+.main .hero {
+  margin-top: calc(var(--nav-height) * -1);
+}
+
+.navbar, .main-nav, .main {
+  transition: transform .5s cubic-bezier(.68,.05,.35,1);
+}
+
+@media (max-width: 768px) {
+  .nav-open .navbar{
+    transform: translate3d(-300px,0,0);
+  }
+  .nav-open .main-nav {
+    transform: translateZ(0);
+  }
+  .nav-open .main {
+    transform: translate3d(-150px,0,0);
+  }
+}
+
