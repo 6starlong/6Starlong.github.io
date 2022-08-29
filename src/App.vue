@@ -27,5 +27,5 @@ useHead({
     <router-view />
     <Footer />
   </main>
+  <BackToTop />
 </template>
-

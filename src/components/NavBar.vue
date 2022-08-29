@@ -68,7 +68,7 @@ onMounted(() => {
 <style scoped>
 .header {
   --at-apply: fixed top-0 inset-x-0 z-10 flex pl-5 pr-2 md:pr-8;
-  --at-apply: border-b-[var(--c-divider)] transition-all duration-300;
+  --at-apply: border-b border-b-transparent transition-all-300;
 }
 
 .header.header--cover {
@@ -76,7 +76,7 @@ onMounted(() => {
 }
 
 .header:not(.header--top) {
-  --at-apply: text-current bg-[var(--c-bg-overlay)] border-b;
+  --at-apply: text-current bg-[var(--c-bg-overlay)] border-b-[var(--c-divider)];
 }
 
 .header:not(.header--visible) {
