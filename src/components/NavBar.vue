@@ -16,6 +16,7 @@ const { title, avatar, nav, isNavOpen: open, toggleNavbar } = $(store)
         <div />
       </div>
     </div>
+
     <nav class="main-nav">
       <template v-for="item in nav" :key="item.path">
         <router-link :to="item.path" :title="item.title">
