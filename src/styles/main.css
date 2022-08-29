@@ -13,8 +13,10 @@
 
 :root {
   --c-bg: #fff;
+  --c-bg-overlay: rgba(255,255,255,.9);
   --c-scrollbar: #eee;
   --c-scrollbar-hover: #bbb;
+  --c-divider: rgba(60,60,60,.12);
 }
 
 html {
@@ -23,9 +25,10 @@ html {
 
 html.dark {
   --c-bg: #121518;
+  --c-bg-overlay: rgba(18,21,24,.9);
   --c-scrollbar: #111;
   --c-scrollbar-hover: #222;
-  color-scheme: dark;
+  --c-divider: rgba(84,84,84,.48);
 }
 
 #nprogress {

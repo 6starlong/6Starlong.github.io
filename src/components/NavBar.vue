@@ -2,10 +2,29 @@
 const route = useRoute()
 const store = useStore()
 const { title, avatar, nav, isNavOpen: open, toggleNavbar } = $(store)
+
+let isTop = $ref(true)
+let toBottom = $ref(false)
+onMounted(() => {
+  const { y, directions } = useScroll(document, {
+    onScroll() {
+      const { bottom } = $(directions)
+      isTop = y.value === 0
+      toBottom = bottom
+    },
+  })
+})
 </script>
 
 <template>
-  <header class="header" :class="{ 'header--cover': route.meta.layout === 'home' }">
+  <header
+    class="header"
+    :class="{
+      'header--cover': route.meta.layout === 'home',
+      'header--top': isTop,
+      'header--visible': !toBottom,
+    }"
+  >
     <div class="navbar">
       <router-link class="flex shrink-0 hover:!op-60 transition-opacity-250" to="/">
         <img :src="avatar" class="w-6 h-6 rounded-1/2">
@@ -19,7 +38,10 @@ const { title, avatar, nav, isNavOpen: open, toggleNavbar } = $(store)
 
     <nav class="main-nav">
       <template v-for="item in nav" :key="item.path">
-        <router-link :to="item.path" :title="item.title">
+        <router-link
+          :to="item.path" :title="item.title"
+          :class="route.path.includes(item.path) && 'router-link-active'"
+        >
           <div :class="item.icon" translate-y="-0.3" />
           <span class="ml-1 font-500">{{ item.title }}</span>
         </router-link>
@@ -45,16 +67,24 @@ const { title, avatar, nav, isNavOpen: open, toggleNavbar } = $(store)
 
 <style scoped>
 .header {
-  --at-apply: fixed top-0 inset-x-0 z-10 pl-5 pr-2 md:pr-8;
-  --at-apply: flex transition-all duration-250;
+  --at-apply: fixed top-0 inset-x-0 z-10 flex pl-5 pr-2 md:pr-8;
+  --at-apply: border-b-[var(--c-divider)] transition-all duration-300;
 }
 
 .header.header--cover {
   --at-apply: text-gray-200;
 }
 
+.header:not(.header--top) {
+  --at-apply: text-current bg-[var(--c-bg-overlay)] border-b;
+}
+
+.header:not(.header--visible) {
+  --at-apply: top-[calc(var(--nav-height)*-1)];
+}
+
 .navbar {
-  --at-apply: w-full z-100 flex justify-between items-center;
+  --at-apply: z-20 flex-1 flex justify-between items-center;
 }
 
 .main-nav {
