@@ -1,12 +1,17 @@
 <script setup>
-const { title } = useStore()
+const { title, frontmatter } = $(useStore())
 </script>
 
 <template>
-  <footer p="6 t-10">
-    <div class="prose m-auto opacity-50 flex">
+  <footer v-if="frontmatter.footer !== false" class="footer">
+    <div :class="frontmatter.layout && frontmatter.layout !== 'doc' ? 'container' : 'prose m-auto'">
       <span class="font-500 text-sm"> 2022-PRESENT © Powered by {{ title }}</span>
-      <div class="flex-auto" />
     </div>
   </footer>
 </template>
+
+<style scoped>
+.footer {
+  --at-apply: p-6 opacity-50;
+}
+</style>

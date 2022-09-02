@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import generateSitemap from 'vite-ssg-sitemap'
+import Layouts from 'vite-plugin-vue-layouts'
 import Unocss from 'unocss/vite'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -47,8 +48,16 @@ export default defineConfig({
       },
     }),
 
+    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
+    Layouts({ defaultLayout: 'Doc' }),
+
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/, /\.vue\?vue/, // .vue
+        /\.md$/, // .md
+      ],
       imports: [
         'vue',
         'vue-router',
@@ -80,8 +89,7 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-vue-markdown
     // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
     Markdown({
-      wrapperComponent: 'post',
-      wrapperClasses: 'prose m-auto',
+      wrapperClasses: '',
       headEnabled: true,
       markdownItSetup(md) {
         // https://prismjs.com/

@@ -23,9 +23,9 @@ useHead({
 
 <template>
   <NavBar />
-  <main class="main">
-    <router-view />
-    <Footer />
+  <main class="content">
+    <RouterView />
   </main>
-  <BackToTop />
+  <Footer />
+  <BackTop />
 </template>

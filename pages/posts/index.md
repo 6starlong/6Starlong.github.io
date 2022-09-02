@@ -1,6 +1,6 @@
 ---
-title: Blog - Starlong
-display: false
+layout: page
+title: Blog | Starlong
 ---
 
 <ListPosts />

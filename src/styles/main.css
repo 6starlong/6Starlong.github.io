@@ -87,15 +87,14 @@ html:not(.dark) [img-dark] {
   height: var(--nav-height);
 }
 
-.main {
-  margin-top: var(--nav-height);
+.content {
+  padding-top: var(--nav-height);
 }
 
-.main .hero {
-  margin-top: calc(var(--nav-height) * -1);
-}
-
-.navbar, .main-nav, .main {
+.navbar,
+.main-nav,
+.content,
+.footer {
   transition: transform .5s cubic-bezier(.68,.05,.35,1);
 }
 
@@ -106,7 +105,8 @@ html:not(.dark) [img-dark] {
   .nav-open .main-nav {
     transform: translateZ(0);
   }
-  .nav-open .main {
+  .nav-open .content,
+  .nav-open .footer {
     transform: translate3d(-150px,0,0);
   }
 }

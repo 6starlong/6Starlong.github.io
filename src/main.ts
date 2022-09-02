@@ -1,11 +1,18 @@
 import { ViteSSG } from 'vite-ssg'
+import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
 import type { UserModule } from './types'
-import routes from '~pages'
+import generatedRoutes from '~pages'
 
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
+
+const routes = setupLayouts(generatedRoutes.map((item) => {
+  if (item.meta?.frontmatter.layout)
+    item.meta.layout = item.meta?.frontmatter.layout.replace(/^\S/, (s: string) => s.toUpperCase())
+  return item
+}))
 
 const scrollBehavior = async (to: any, from: any, savedPosition: any) => {
   if (savedPosition) { return { ...savedPosition, behavior: 'smooth' } }

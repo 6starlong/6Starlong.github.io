@@ -22,13 +22,13 @@ const posts = computed(() => (props.posts || routes))
 </script>
 
 <template>
-  <section class="md:w-full lg:w-688px xl:w-900px md:translate-x-[calc(65ch/2-50%)]">
+  <section>
     <ul>
       <template v-for="route, idx in posts" :key="route.path">
         <RouterLink :to="route.path" no-underline>
           <li class="pt-8 pb-5">
             <div
-              class="h-60 bg-cover bg-center duration-300 hover:scale-[1.05] rounded"
+              class="h-62 bg-cover bg-center duration-300 hover:scale-[1.05] rounded"
               :class="idx ? `bg-[url(https://p0.meituan.net/csc/a36a11f29ac67842a71b2fcd4c41291b530265.jpg)]` : 'bg-[url(https://p0.meituan.net/csc/4f2840d18a3f0c52638fc4d0af10f61a635711.jpg)]'"
             >
               <div class="p-8 w-full h-full justify-center items-center text-center" flex="~ col">

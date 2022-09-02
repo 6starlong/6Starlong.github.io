@@ -1,14 +1,8 @@
-<script setup lang='ts'>
-const { frontmatter } = defineProps({
-  frontmatter: {
-    type: Object,
-    required: true,
-  },
-})
-
+<script setup lang="ts">
 const router = useRouter()
 const route = useRoute()
 const content = ref<HTMLDivElement>()
+const { frontmatter } = $(useStore())
 
 onMounted(() => {
   const navigate = () => {
@@ -60,32 +54,35 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="px-6 py-10">
-    <div
-      v-if="frontmatter.display ?? frontmatter.title"
-      class="prose m-auto mb-8"
-    >
-      <h1>
-        {{ frontmatter.display ?? frontmatter.title }}
-      </h1>
-      <p v-if="frontmatter.date" class="opacity-50 !-mt-2">
-        {{ frontmatter.date }}
-        <span v-if="frontmatter.duration">· {{ frontmatter.duration }}</span>
-      </p>
-      <p v-if="frontmatter.subtitle" class="opacity-50 !-mt-6 italic">
-        {{ frontmatter.subtitle }}
-      </p>
-    </div>
-    <article ref="content">
-      <slot />
-    </article>
-    <div v-if="route.path !== '/'" class="prose m-auto my-8">
-      <RouterLink
-        :to="route.path.split('/').slice(0, -1).join('/') || '/'"
-        class="font-mono no-underline opacity-50 hover:opacity-75"
-      >
-        cd ..
-      </RouterLink>
+  <div class="doc">
+    <div class="prose m-auto">
+      <div v-if="frontmatter.title" class="mb-8">
+        <h1> {{ frontmatter.title }} </h1>
+        <p v-if="frontmatter.date" class="opacity-50 !-mt-2">
+          {{ frontmatter.date }}
+          <span v-if="frontmatter.duration">· {{ frontmatter.duration }}</span>
+        </p>
+        <p v-if="frontmatter.subtitle" class="opacity-50 !-mt-6 italic">
+          {{ frontmatter.subtitle }}
+        </p>
+      </div>
+
+      <RouterView ref="content" />
+
+      <div class="my-8">
+        <RouterLink
+          :to="route.path.split('/').slice(0, -1).join('/') || '/'"
+          class="font-mono no-underline opacity-50 hover:opacity-75"
+        >
+          cd ..
+        </RouterLink>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.doc {
+  --at-apply: px-6 pt-10 pb-4;
+}
+</style>

@@ -20,7 +20,7 @@ onMounted(() => {
   <header
     class="header"
     :class="{
-      'header--cover': route.meta.layout === 'home',
+      'header--cover': route.path === '/',
       'header--top': isTop,
       'header--visible': !toBottom,
     }"

@@ -11,13 +11,13 @@ const backTop = () => window?.scrollTo({ top: 0, behavior: 'smooth' })
 </script>
 
 <template>
-  <div class="top " :class="{ 'is-active animate-wobble': active }" @click="backTop">
+  <div class="back-top" :class="{ 'is-active animate-wobble': active }" @click="backTop">
     <div i-ri:arrow-up-s-line text-lg />
   </div>
 </template>
 
 <style scoped>
-  .top {
+  .back-top {
     position: fixed;
     right: -100px;
     z-index: 1;
@@ -32,7 +32,7 @@ const backTop = () => window?.scrollTo({ top: 0, behavior: 'smooth' })
     --at-apply: bg-#ebebeb dark:bg-#1c2024;
   }
 
-  .top.is-active {
+  .back-top.is-active {
     --at-apply: right-36px lt-md:right-24px;
   }
   </style>
