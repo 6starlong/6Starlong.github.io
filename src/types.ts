@@ -15,4 +15,5 @@ export interface Post {
   date: string
   desc?: string
   duration?: string
+  image?: string
 }

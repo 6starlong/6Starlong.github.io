@@ -16,6 +16,7 @@ const routes: Post[] = router.getRoutes()
     title: i.meta.frontmatter.title,
     date: i.meta.frontmatter.date,
     duration: i.meta.frontmatter.duration,
+    image: i.meta.frontmatter.image,
   }))
 
 const posts = computed(() => (props.posts || routes))
@@ -24,19 +25,20 @@ const posts = computed(() => (props.posts || routes))
 <template>
   <section>
     <ul>
-      <template v-for="route, idx in posts" :key="route.path">
+      <template v-for="route in posts" :key="route.path">
         <RouterLink :to="route.path" no-underline>
-          <li class="pt-8 pb-5">
+          <li class="pb-10">
             <div
-              class="h-62 bg-cover bg-center duration-300 hover:scale-[1.05] rounded"
-              :class="idx ? `bg-[url(https://p0.meituan.net/csc/a36a11f29ac67842a71b2fcd4c41291b530265.jpg)]` : 'bg-[url(https://p0.meituan.net/csc/4f2840d18a3f0c52638fc4d0af10f61a635711.jpg)]'"
+              class="h-65 rounded duration-300 hover:scale-[1.05]"
+              bg="cover center"
+              :style="{ backgroundImage: `url(${route.image})` }"
             >
-              <div class="p-8 w-full h-full justify-center items-center text-center" flex="~ col">
+              <div class="p-8 w-full h-full justify-center items-center" flex="~ col">
                 <div class="my-3 text-25px text-#fff font-bold">
                   {{ route.title }}
                 </div>
                 <div class="text-#fbf8f5 leading-none">
-                  {{ route.date }}
+                  {{ formatDate(route.date) }}
                 </div>
               </div>
             </div>
