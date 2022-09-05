@@ -130,7 +130,7 @@ h6:focus .header-anchor {
   content: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .table-of-contents {
     display: none;
   }
@@ -147,12 +147,13 @@ h6:focus .header-anchor {
   overflow-y: auto;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  opacity: 0;
+  /* opacity: 0; */
+  opacity: 0.5;
   transition: all .4s ease-out;
 }
 
 .table-of-contents:hover {
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 .table-of-contents ul > li::before {

@@ -5,10 +5,15 @@ const content = ref<HTMLDivElement>()
 const { frontmatter } = $(useStore())
 
 onMounted(() => {
+  const { y } = $(useWindowScroll())
+
   const navigate = () => {
     if (location.hash) {
-      document.querySelector(decodeURIComponent(location.hash))
-        ?.scrollIntoView({ behavior: 'smooth' })
+      const el = document.querySelector(decodeURIComponent(location.hash)) as HTMLDivElement
+      if (y < el.offsetTop)
+        el.scrollIntoView({ behavior: 'smooth' })
+      else
+        window.scrollTo({ top: el.offsetTop - 88, behavior: 'smooth' })
     }
   }
 

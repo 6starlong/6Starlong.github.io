@@ -15,12 +15,11 @@ const routes = setupLayouts(generatedRoutes.map((item) => {
 }))
 
 const scrollBehavior = async (to: any, from: any, savedPosition: any) => {
-  if (savedPosition) { return { ...savedPosition, behavior: 'smooth' } }
-  else {
-    // https://github.com/vuejs/router/issues/1147#issuecomment-939265893
-    await new Promise(resolve => setTimeout(resolve, 300))
+  if (savedPosition)
+    // 'smooth' causes anchor navigation to fail
+    return { ...savedPosition, behavior: to.hash ? undefined : 'smooth' }
+  else
     return { top: 0, behavior: 'smooth' }
-  }
 }
 
 // https://github.com/antfu/vite-ssg
