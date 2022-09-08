@@ -19,6 +19,7 @@ import matter from 'gray-matter'
 // @ts-expect-error missing types
 import TOC from 'markdown-it-table-of-contents'
 import { slugify } from './scripts/slugify'
+import { getGitTimestamp } from './scripts/getGitTimestamp'
 
 export default defineConfig({
   resolve: {
@@ -39,12 +40,20 @@ export default defineConfig({
       pagesDir: 'pages',
       extendRoute(route) {
         const path = resolve(__dirname, route.component.slice(1))
-
         const md = fs.readFileSync(path, 'utf-8')
         const { data } = matter(md)
         route.meta = Object.assign(route.meta || {}, { frontmatter: data })
-
         return route
+      },
+      onRoutesGenerated(routes) {
+        return Promise.all(routes.map(
+          async (route) => {
+            const path = resolve(__dirname, route.component.slice(1))
+            const lastUpdated = await getGitTimestamp(path)
+            route.meta.frontmatter.lastUpdated = lastUpdated
+            return route
+          },
+        ))
       },
     }),
 
