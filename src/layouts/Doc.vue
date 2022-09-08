@@ -65,9 +65,10 @@ onMounted(() => {
         <h1> {{ frontmatter.title }} </h1>
         <p v-if="frontmatter.date" class="opacity-50 !-mt-2">
           {{ formatDate(frontmatter.date) }}
-          <span v-if="frontmatter.duration">· {{ frontmatter.duration }}</span>
+          <span v-if="frontmatter.duration"> · {{ frontmatter.duration }}</span>
+          <span v-if="frontmatter.lastUpdated" ml-2> Updated on {{ formatTimeAgo(frontmatter.lastUpdated) }}</span>
         </p>
-        <p v-if="frontmatter.subtitle" class="opacity-50 !-mt-6 italic">
+        <p v-if="frontmatter.subtitle" class="opacity-50 !-mt-5 italic">
           {{ frontmatter.subtitle }}
         </p>
       </div>

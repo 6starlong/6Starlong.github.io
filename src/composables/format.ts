@@ -1,4 +1,8 @@
 export function formatDate(d: string | Date) {
-  const formatted = $(useDateFormat(d, 'YYYY-MM-DD', { locales: 'zh-CN' }))
-  return formatted
+  return useDateFormat(d, 'YYYY-MM-DD', { locales: 'zh-CN' }).value
 }
+
+export function formatTimeAgo(d: string | Date) {
+  return useTimeAgo(d).value
+}
+
