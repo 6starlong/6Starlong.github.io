@@ -60,12 +60,12 @@ onMounted(() => {
 
 <template>
   <div class="doc">
-    <div v-if="frontmatter.image" class="m-auto px-5 w-1/1 h-75">
-      <img :src="frontmatter.image" class="w-1/1 h-1/1 object-cover rounded-lg">
+    <div v-if="frontmatter.image" class="px-5">
+      <img :src="frontmatter.image" class="w-1/1 h-75 object-cover rounded-lg">
     </div>
     <div class="container">
-      <div class="prose m-auto pt-5">
-        <div v-if="frontmatter.tags" my-5>
+      <div class="prose m-auto py-5">
+        <div v-if="frontmatter.tags" mb-5>
           <span v-for="tag in frontmatter.tags.split(' ')" :key="tag" class="c-#618770 bg-#618770/15 py-1 px-2 mr-2 rounded">
             {{ tag }}
           </span>

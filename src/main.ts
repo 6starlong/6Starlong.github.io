@@ -9,8 +9,8 @@ import './styles/main.css'
 import 'uno.css'
 
 const routes = setupLayouts(generatedRoutes.map((item) => {
-  if (item.meta?.frontmatter.layout)
-    item.meta.layout = item.meta?.frontmatter.layout.replace(/^\S/, (s: string) => s.toUpperCase())
+  if (item.meta)
+    item.meta.layout = item.meta.frontmatter.layout || 'doc'
   return item
 }))
 

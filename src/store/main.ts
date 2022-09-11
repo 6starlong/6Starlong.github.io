@@ -15,6 +15,7 @@ export const useStore = defineStore('main', () => {
   const toggleNavbar = useToggle(isNavOpen)
   watch(isNavOpen, () => document.body.classList.toggle('nav-open'))
 
+  const layout = computed(() => useRoute().meta.layout)
   const frontmatter = computed(() => useRoute().meta.frontmatter)
 
   return {
@@ -23,6 +24,7 @@ export const useStore = defineStore('main', () => {
     nav,
     isNavOpen,
     toggleNavbar,
+    layout,
     frontmatter,
   }
 })
