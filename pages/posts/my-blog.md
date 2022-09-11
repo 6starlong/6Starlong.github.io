@@ -2,7 +2,8 @@
 title: 我的博客
 date: 2022-09-05
 duration: 2min
-image: https://p0.meituan.net/csc/04a2c23d89fde4e6d010a8ffde7f0c2e263579.jpg
+image: https://starlong.netlify.app/assets/wallhaven.795ed113.jpg
+tags: 散文
 ---
 
 作为一个 <strong>FE Developer</strong>，我一直觉得我可能需要一个博客。

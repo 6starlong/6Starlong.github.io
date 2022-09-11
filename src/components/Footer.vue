@@ -12,6 +12,6 @@ const { title, frontmatter } = $(useStore())
 
 <style scoped>
 .footer {
-  --at-apply: p-6 opacity-50;
+  @apply p-6 opacity-50;
 }
 </style>

@@ -138,8 +138,8 @@ h6:focus .header-anchor {
 
 .table-of-contents {
   position: fixed;
-  top: 80px;
-  padding-top: 70px;
+  top: 88px;
+  margin-top: 300px;
   font-size: 0.8em;
   right: 10px;
   width: 200px;
@@ -147,13 +147,15 @@ h6:focus .header-anchor {
   overflow-y: auto;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  /* opacity: 0; */
+}
+
+.table-of-contents a {
   opacity: 0.5;
   transition: all .4s ease-out;
 }
 
-.table-of-contents:hover {
-  /* opacity: 0.5; */
+.table-of-contents a:hover {
+  opacity: 1;
 }
 
 .table-of-contents ul > li::before {

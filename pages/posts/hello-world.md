@@ -1,5 +1,5 @@
 ---
-title: 「Hello World」
+title: Hello World
 date: 2022-02-22
 duration: 3min
 subtitle: 这是一个子标题

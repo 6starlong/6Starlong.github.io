@@ -37,15 +37,14 @@ onMounted(() => {
     </div>
 
     <nav class="main-nav">
-      <template v-for="item in nav" :key="item.path">
-        <router-link
-          :to="item.path" :title="item.title"
-          :class="route.path.includes(item.path) && 'router-link-active'"
-        >
-          <div :class="item.icon" translate-y="-0.3" />
-          <span class="ml-1 font-500">{{ item.title }}</span>
-        </router-link>
-      </template>
+      <router-link
+        v-for="item in nav" :key="item.path"
+        :to="item.path" :title="item.title"
+        :class="route.path.includes(item.path) && 'router-link-active'"
+      >
+        <div :class="item.icon" translate-y="-0.3" />
+        <span class="ml-1 font-500">{{ item.title }}</span>
+      </router-link>
 
       <hr class="md:hidden border-current op-30">
 
@@ -67,37 +66,38 @@ onMounted(() => {
 
 <style scoped>
 .header {
-  --at-apply: fixed top-0 inset-x-0 z-10 flex pl-5 pr-2 md:pr-8;
-  --at-apply: border-b border-b-transparent transition-all-300;
+  @apply fixed top-0 inset-x-0 z-10 flex px-5 border-b;
+  @apply border-b-transparent transition-all-300;
 }
 
 .header.header--cover {
-  --at-apply: text-gray-200;
+  @apply text-gray-200;
 }
 
 .header:not(.header--top) {
-  --at-apply: text-current bg-[var(--c-bg-overlay)] border-b-[var(--c-divider)];
+  @apply text-current bg-[var(--c-bg-overlay)] border-b-[var(--c-divider)];
 }
 
 .header:not(.header--visible) {
-  --at-apply: top-[calc(var(--nav-height)*-1)];
+  @apply top-[calc(var(--nav-height)*-1)];
 }
 
 .navbar {
-  --at-apply: z-20 flex-1 flex justify-between items-center;
+  @apply z-20 flex-1 flex justify-between items-center;
 }
 
 .main-nav {
-  --at-apply: md:text-sm grid grid-flow-col gap-5;
+  @apply grid grid-flow-col gap-5 grid-auto-rows-min;
+  @apply md:text-sm md:content-center;
 }
 
 .main-nav a {
-  --at-apply: flex items-center op-60 transition-opacity-250;
+  @apply flex items-center op-60 transition-opacity-250;
 }
 
 .main-nav a:hover,
 a.router-link-active {
-  --at-apply: op-100;
+  @apply op-100;
 }
 
 @media (max-width: 768px) {
@@ -110,21 +110,19 @@ a.router-link-active {
     width: 300px;
     height: 100vh;
     grid-auto-flow: row;
-    grid-auto-rows: min-content;
     grid-auto-columns: min-content;
     background-color: var(--c-bg);
     transform: translate3d(300px, 0, 0);
-    --at-apply: text-gray-700 dark:text-gray-200;
+    @apply text-gray-700 dark:text-gray-200;
   }
 }
 
 .hamburger {
   position: relative;
   z-index: 100;
-  width: 2rem;
-  height: 2rem;
+  width: 20px;
+  height: 20px;
   display: flex;
-  justify-content: center;
   align-items: center;
   cursor: pointer;
   border-radius: 50%;
@@ -189,6 +187,6 @@ a.router-link-active {
 
 .backdrop,
 .hamburger {
-  --at-apply: md:hidden;
+  @apply md:hidden;
 }
 </style>

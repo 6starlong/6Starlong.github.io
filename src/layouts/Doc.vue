@@ -60,35 +60,39 @@ onMounted(() => {
 
 <template>
   <div class="doc">
-    <div class="prose m-auto">
-      <div v-if="frontmatter.title" class="mb-8">
-        <h1> {{ frontmatter.title }} </h1>
-        <p v-if="frontmatter.date" class="opacity-50 !-mt-2">
-          {{ formatDate(frontmatter.date) }}
-          <span v-if="frontmatter.duration"> · {{ frontmatter.duration }}</span>
-          <span v-if="frontmatter.lastUpdated" ml-2> Updated on {{ formatTimeAgo(frontmatter.lastUpdated) }}</span>
-        </p>
-        <p v-if="frontmatter.subtitle" class="opacity-50 !-mt-5 italic">
-          {{ frontmatter.subtitle }}
-        </p>
-      </div>
+    <div v-if="frontmatter.image" class="m-auto px-5 w-1/1 h-75">
+      <img :src="frontmatter.image" class="w-1/1 h-1/1 object-cover rounded-lg">
+    </div>
+    <div class="container">
+      <div class="prose m-auto pt-5">
+        <div v-if="frontmatter.tags" my-5>
+          <span v-for="tag in frontmatter.tags.split(' ')" :key="tag" class="c-#618770 bg-#618770/15 py-1 px-2 mr-2 rounded">
+            {{ tag }}
+          </span>
+        </div>
+        <div v-if="frontmatter.title" class="mb-8">
+          <h1> {{ frontmatter.title }} </h1>
+          <p v-if="frontmatter.date" class="opacity-50 !-mt-5">
+            {{ formatDate(frontmatter.date) }}
+            <span v-if="frontmatter.duration"> · {{ frontmatter.duration }}</span>
+            <span v-if="frontmatter.lastUpdated" ml-2> Updated on {{ formatTimeAgo(frontmatter.lastUpdated) }}</span>
+          </p>
+          <p v-if="frontmatter.subtitle" class="opacity-50 !-mt-5 italic">
+            {{ frontmatter.subtitle }}
+          </p>
+        </div>
 
-      <RouterView ref="content" />
+        <RouterView ref="content" />
 
-      <div class="my-8">
-        <RouterLink
-          :to="route.path.split('/').slice(0, -1).join('/') || '/'"
-          class="font-mono no-underline opacity-50 hover:opacity-75"
-        >
-          cd ..
-        </RouterLink>
+        <div class="my-8">
+          <RouterLink
+            :to="route.path.split('/').slice(0, -1).join('/') || '/'"
+            class="font-mono no-underline opacity-50 hover:opacity-75"
+          >
+            cd ..
+          </RouterLink>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.doc {
-  --at-apply: px-6 pt-10 pb-4;
-}
-</style>

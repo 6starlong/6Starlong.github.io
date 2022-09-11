@@ -28,12 +28,12 @@ const backTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
     border-radius: 50%;
     cursor: pointer;
     transition: right .25s ease;
-    --at-apply: bottom-36px lt-md:bottom-24px;
-    --at-apply: bg-#ebebeb dark:bg-#1c2024;
+    @apply bottom-9 lt-md:bottom-6;
+    @apply bg-#ebebeb dark:bg-#1c2024;
   }
 
   .back-top.is-active {
-    --at-apply: right-36px lt-md:right-24px;
+    @apply right-9 lt-md:right-6;
   }
   </style>
 

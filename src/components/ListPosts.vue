@@ -23,29 +23,30 @@ const posts = computed(() => (props.posts || routes))
 </script>
 
 <template>
-  <section>
-    <ul>
-      <template v-for="route in posts" :key="route.path">
-        <RouterLink :to="route.path" no-underline>
-          <li class="pb-10">
-            <div
-              class="relative h-65 rounded duration-300 hover:scale-[1.05]"
-              bg="cover center"
-              :style="{ backgroundImage: `url(${route.image})` }"
-            >
-              <div class="absolute inset-0 bg-#121518/25" />
-              <div class="relative z-1 p-8 w-full h-full justify-center items-center" flex="~ col">
-                <div class="my-3 text-25px text-#fff font-bold">
-                  {{ route.title }}
-                </div>
-                <div class="text-#fbf8f5 leading-none">
-                  {{ formatDate(route.date) }}
-                </div>
-              </div>
+  <div class="container">
+    <div my-8>
+      <RouterLink
+        v-for="route in posts"
+        :key="route.path"
+        :to="route.path"
+        class="block max-w-225 mx-auto"
+      >
+        <div
+          class="relative mb-10 h-60 rounded duration-300 hover:scale-[1.05]"
+          bg="cover center"
+          :style="{ backgroundImage: `url(${route.image})` }"
+        >
+          <div class="absolute inset-0 bg-#121518/25" />
+          <div class="relative z-1 p-8 w-full h-full justify-center items-center" flex="~ col">
+            <div class="my-3 text-25px text-#fff font-bold">
+              {{ route.title }}
             </div>
-          </li>
-        </RouterLink>
-      </template>
-    </ul>
-  </section>
+            <div class="text-#fbf8f5 leading-none">
+              {{ formatDate(route.date) }}
+            </div>
+          </div>
+        </div>
+      </RouterLink>
+    </div>
+  </div>
 </template>
