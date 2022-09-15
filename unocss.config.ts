@@ -25,6 +25,10 @@ export default defineConfig({
     }),
   ],
   theme: {
+    spacing: { 0: 0 },
+    boxShadow: {
+      1: '0 2px 12px rgb(0 0 0 / 7%)',
+    },
     breakpoints: {
       sm: '512px',
       md: '768px',
@@ -33,7 +37,9 @@ export default defineConfig({
     },
   },
   rules: [],
-  shortcuts: [],
+  shortcuts: [
+    [/^(.*)-var[(](.+)[)]$/, ([,prefix, value]) => `${prefix}-[var(${value})]`],
+  ],
   transformers: [
     transformerDirectives(),
     transformerVariantGroup(),

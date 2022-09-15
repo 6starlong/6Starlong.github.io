@@ -32,7 +32,7 @@ const posts = computed(() => (props.posts || routes))
         class="block max-w-225 mx-auto"
       >
         <div
-          class="relative mb-10 h-60 rounded duration-300 hover:scale-[1.05]"
+          class="relative mb-10 h-60 rounded duration-300 hover:scale-105"
           bg="cover center"
           :style="{ backgroundImage: `url(${route.image})` }"
         >

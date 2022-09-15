@@ -4,15 +4,16 @@ const store = useStore()
 const { title, avatar, nav, isNavOpen: open, toggleNavbar } = $(store)
 
 let isTop = $ref(true)
-let toBottom = $ref(false)
+let visible = $ref(true)
 onMounted(() => {
   const { y, directions } = useScroll(document, {
     onScroll() {
       const { bottom } = $(directions)
       isTop = y.value === 0
-      toBottom = bottom
+      visible = !(y.value > 100 && bottom)
     },
   })
+  watch(() => open, () => visible = true)
 })
 </script>
 
@@ -22,7 +23,7 @@ onMounted(() => {
     :class="{
       'header--cover': route.path === '/',
       'header--top': isTop,
-      'header--visible': !toBottom,
+      'header--fixed': open || visible,
     }"
   >
     <div class="navbar">
@@ -66,19 +67,21 @@ onMounted(() => {
 
 <style scoped>
 .header {
-  @apply fixed top-0 inset-x-0 z-10 flex px-5 border-b;
-  @apply border-b-transparent transition-all-300;
+  @apply fixed top-0 inset-x-0 z-10 flex px-5;
+  @apply h-var(--nav-height) transition-(height,top)-300;
 }
 
 .header.header--cover {
-  @apply text-gray-200;
+  @apply text-var(--c-text-inverse) dark:text-var(--c-text);
 }
 
 .header:not(.header--top) {
-  @apply text-current bg-[var(--c-bg-overlay)] border-b-[var(--c-divider)];
+  --nav-height: 60px;
+  @apply text-current backdrop-(saturate-180 blur);
+  @apply bg-#fff/75 dark:bg-#121518/75 shadow-1;
 }
 
-.header:not(.header--visible) {
+.header:not(.header--fixed) {
   @apply top-[calc(var(--nav-height)*-1)];
 }
 
@@ -88,16 +91,7 @@ onMounted(() => {
 
 .main-nav {
   @apply grid grid-flow-col gap-5 grid-auto-rows-min;
-  @apply md:text-sm md:content-center;
-}
-
-.main-nav a {
-  @apply flex items-center op-60 transition-opacity-250;
-}
-
-.main-nav a:hover,
-a.router-link-active {
-  @apply op-100;
+  @apply md:(text-sm content-center);
 }
 
 @media (max-width: 768px) {
@@ -111,10 +105,19 @@ a.router-link-active {
     height: 100vh;
     grid-auto-flow: row;
     grid-auto-columns: min-content;
+    color: var(--c-text);
     background-color: var(--c-bg);
     transform: translate3d(300px, 0, 0);
-    @apply text-gray-700 dark:text-gray-200;
   }
+}
+
+.main-nav a {
+  @apply flex items-center op-60 transition-opacity-250;
+}
+
+.main-nav a:hover,
+a.router-link-active {
+  @apply op-100;
 }
 
 .hamburger {
@@ -180,8 +183,9 @@ a.router-link-active {
   left: 0;
   right: 0;
   bottom: 0;
+  height: 100vh;
   z-index: 10;
-  background: rgba(0,0,0,.6);
+  background: rgba(0, 0, 0, .6);
   transition: opacity .5s;
 }
 
