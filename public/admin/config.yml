@@ -1,0 +1,27 @@
+backend:
+  name: git-gateway
+  branch: vitesse
+  squash_merges: true
+media_folder: "public/images"
+public_folder: "/images"
+publish_mode: editorial_workflow
+display_url: https://starlong-me.netlify.app
+locale: "zh_Hans"
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "pages/posts"
+    preview_path: posts/{{slug}}
+    filter: { field: "layout" }
+    create: true
+    identifier_field: slug
+    slug: "{{slug}}"
+    fields:
+      - { label: "链接地址", name: "slug", widget: "string" }
+      - { label: "横幅", name: "image", widget: "image" }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "创建时间", name: "date", widget: "datetime" }
+      - { label: "时长", name: "duration", widget: "number", required: false }
+      - { label: "摘要", name: "description", widget: "string", required: false }
+      - { label: "內容", name: "body", widget: "markdown" }
