@@ -73,6 +73,9 @@ export default defineConfig({
         'vue/macros',
         '@vueuse/head',
         '@vueuse/core',
+        {
+          axios: [['default', 'axios']],
+        },
       ],
       dts: 'src/auto-imports.d.ts',
       dirs: [
@@ -163,7 +166,7 @@ export default defineConfig({
     Inspect(),
 
     // https://github.com/antfu/unplugin-icons
-    Icons(),
+    Icons({ /* options */ }),
   ],
 
   // https://github.com/antfu/vite-ssg

@@ -19,6 +19,13 @@ const routes: Post[] = router.getRoutes()
   }))
 
 const posts = computed(() => (routes.splice(0, 6)))
+
+const response = ref<any>(null)
+const name = $ref('')
+const helloName = async () => {
+  const res = await axios(`/.netlify/functions/hello-name?name=${name}`)
+  response.value = res.data.message
+}
 </script>
 
 <template>
@@ -65,6 +72,15 @@ const posts = computed(() => (routes.splice(0, 6)))
           <RouterLink to="" pl-5>
             See all
           </RouterLink>
+        </div>
+        <div>
+          <div flex>
+            <input v-model="name" type="text" class="pl-2 c-black">
+            <div class="ml-2 bg-blue p-2" @click="helloName">
+              Say Hello
+            </div>
+          </div>
+          <p>Response: {{ response }}</p>
         </div>
       </div>
     </div>
