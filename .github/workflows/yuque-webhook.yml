@@ -1,0 +1,11 @@
+name: yuque-webhook
+
+on:
+  repository_dispatch:
+    types: [webhook]
+
+jobs:
+  update-post:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Hello World!
