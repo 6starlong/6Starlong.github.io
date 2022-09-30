@@ -1,4 +1,8 @@
 ---
+slug: hello-world
+tags:
+  - demo
+  - none
 title: Hello World
 date: 2022-02-22
 duration: 3min
