@@ -1,6 +1,7 @@
 ---
 slug: demo
-title: 这是一个demo
+image: /hero.jpg
+title: 这是一个demo1
 date: 2022-09-25T11:50:12.000Z
 ---
 
