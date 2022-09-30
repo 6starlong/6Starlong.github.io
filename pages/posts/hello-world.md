@@ -1,28 +1,31 @@
 ---
 slug: hello-world
-tags:
-  - demo
-  - none
 title: Hello World
-date: 2022-02-22
-duration: 3min
-subtitle: 这是一个子标题
-image: https://p0.meituan.net/csc/a36a11f29ac67842a71b2fcd4c41291b530265.jpg
+date: 2022-09-30T13:29:32.000Z
 ---
 
 [[toc]]
 
-# 这是一级标题
+[[toc]]
+
+<a name="6781cf93"></a>
+# 这是一级标题 Hello
+
+---
 
 <hr class="!my-50" />
-
+<a name="ea3ad274"></a>
 ## 这是二级标题
 
-```js
+```javascript
 console.log('hello world')
 ```
-<hr class="!my-50" />
 
+---
+
+
+<a name="fc3b7b80"></a>
 ### 这是三级标题
 
-<hr class="!my-50" />
+---
+
