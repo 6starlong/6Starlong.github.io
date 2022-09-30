@@ -1,5 +1,5 @@
 ---
-slug: demo
+slug: mono
 image: /hero.jpg
 title: 这是一个demo1
 date: 2022-09-25T11:50:12.000Z
