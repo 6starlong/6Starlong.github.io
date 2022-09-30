@@ -1,5 +1,6 @@
 ---
-slug: momo
+slug: zhen-tm-6
+image: /images/hero.jpg
 title: 这是一个demo
 date: 2022-09-25T11:50:12.000Z
 ---
