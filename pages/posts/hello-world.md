@@ -1,7 +1,9 @@
 ---
 slug: hello-world
+image: /images/hero.jpg
 title: Hello World
 date: 2022-09-30T13:29:32.000Z
+duration: -2
 ---
 
 [[toc]]
