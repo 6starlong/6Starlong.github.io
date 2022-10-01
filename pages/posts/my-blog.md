@@ -2,7 +2,7 @@
 title: 我的博客
 date: 2022-09-05
 duration: 2min
-image: https://starlong.netlify.app/assets/wallhaven.795ed113.jpg
+image: /images/my-blog.jpg
 tags: [散文]
 ---
 

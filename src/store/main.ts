@@ -2,7 +2,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 export const useStore = defineStore('main', () => {
   const title = ref('Sᴛᴀʀʟᴏɴɢ💫')
-  const avatar = ref('https://starlong.netlify.app/avatar.png')
+  const avatar = ref('https://starlong.xyz/avatar.jpg')
   const nav = ref([
     { title: 'Blog', path: '/posts', icon: 'i-ri:article-line' },
     { title: 'Notes', path: '/notes', icon: 'i-ri-sticky-note-line' },
