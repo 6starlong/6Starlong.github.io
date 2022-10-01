@@ -22,3 +22,6 @@
   for = "/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json"
+
+[functions]
+  node_bundler = "esbuild"

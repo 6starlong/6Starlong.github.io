@@ -2,9 +2,9 @@ name: check
 
 on:
   push:
-    branches: [ vitesse ]
+    branches: [vitesse]
   pull_request:
-    branches: [ vitesse ]
+    branches: [vitesse]
 
 jobs:
   lint:

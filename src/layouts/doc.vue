@@ -66,7 +66,7 @@ onMounted(() => {
     <div class="container">
       <div class="prose m-auto py-5">
         <div v-if="frontmatter.tags" mb-5>
-          <span v-for="tag in frontmatter.tags.split(' ')" :key="tag" class="c-#618770 bg-#618770/15 py-1 px-2 mr-2 rounded">
+          <span v-for="tag in frontmatter.tags" :key="tag" class="c-#618770 bg-#618770/15 py-1 px-2 mr-2 rounded">
             {{ tag }}
           </span>
         </div>

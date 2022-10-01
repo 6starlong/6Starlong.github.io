@@ -19,6 +19,7 @@ specifiers:
   eslint: ^8.24.0
   gray-matter: ^4.0.3
   https-localhost: ^4.7.1
+  js-base64: ^3.7.2
   markdown-it-anchor: ^8.6.5
   markdown-it-link-attributes: ^4.0.1
   markdown-it-shiki: ^0.5.1
@@ -72,6 +73,7 @@ devDependencies:
   eslint: 8.24.0
   gray-matter: 4.0.3
   https-localhost: 4.7.1
+  js-base64: 3.7.2
   markdown-it-anchor: 8.6.5
   markdown-it-link-attributes: 4.0.1
   markdown-it-shiki: 0.5.1
@@ -4825,6 +4827,10 @@ packages:
   /jiti/1.16.0:
     resolution: {integrity: sha512-L3BJStEf5NAqNuzrpfbN71dp43mYIcBUlCRea/vdyv5dW/AYa1d4bpelko4SHdY3I6eN9Wzyasxirj1/vv5kmg==}
     hasBin: true
+    dev: true
+
+  /js-base64/3.7.2:
+    resolution: {integrity: sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==}
     dev: true
 
   /js-sdsl/4.1.4:

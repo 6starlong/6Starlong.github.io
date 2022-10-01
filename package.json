@@ -9,8 +9,7 @@
     "preview": "npm run build && vite preview",
     "preview-https": "serve dist",
     "typecheck": "vue-tsc --noEmit",
-    "up": "taze major -I",
-    "sync": "node scripts/sync-posts.js"
+    "up": "taze major -I"
   },
   "dependencies": {
     "@vueuse/core": "^9.3.0",
@@ -38,6 +37,7 @@
     "eslint": "^8.24.0",
     "gray-matter": "^4.0.3",
     "https-localhost": "^4.7.1",
+    "js-base64": "^3.7.2",
     "markdown-it-anchor": "^8.6.5",
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-shiki": "^0.5.1",
