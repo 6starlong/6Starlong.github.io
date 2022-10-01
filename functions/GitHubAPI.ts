@@ -127,12 +127,14 @@ class API {
   }
 
   // 创建拉取请求 pulls
-  createPulls(label: string, slug: string) {
+  createPulls(label: string, slug: string, type: string) {
     return this.post('/pulls', {
       base: this.branch,
       body: '由语雀同步至 Netlify CMS 自动生成',
       head: label,
-      title: `chore(cms): update ${slug}`,
+      title: type === 'publish'
+        ? `feat(cms): create ${slug}`
+        : `chore(cms): update ${slug}`,
     })
   }
 
