@@ -1,7 +1,15 @@
 backend:
   name: git-gateway
+  repo: 6starlong/6starlong.github.io
   branch: vitesse
   squash_merges: true
+  commit_messages:
+    create: "feat(cms): create {{slug}}.md"
+    update: "chore(cms): update {{slug}}.md"
+    delete: "chore(cms): delete {{slug}}.md"
+    uploadMedia: "chore(cms): upload {{path}}"
+    deleteMedia: "chore(cms): delete {{path}}"
+    openAuthoring: "{{message}}"
 media_folder: "public/images"
 public_folder: "/images"
 publish_mode: editorial_workflow
@@ -17,7 +25,7 @@ collections:
     identifier_field: slug
     slug: "{{slug}}"
     fields:
-      - { label: "链接地址", name: "slug", widget: "string" }
+      - { label: "路径", name: "slug", widget: "string" }
       - { label: "横幅", name: "image", widget: "image" }
       - { label: "标签", name: "tags", widget: "list", required: false }
       - { label: "标题", name: "title", widget: "string" }
