@@ -1,4 +1,6 @@
 ---
+slug: test
+image: /images/my-blog.jpg
 title: Test
 date: 2022-11-08T10:58:44.000Z
 duration: 4min
