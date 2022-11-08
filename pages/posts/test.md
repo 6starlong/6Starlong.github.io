@@ -1,14 +1,14 @@
 ---
 slug: test
 image: /images/my-blog.jpg
-title: Test
+title: Test测试
 date: 2022-11-08T10:58:44.000Z
 duration: 4min
 ---
 
 通常我的项目中都会集成 [Prettier](https://prettier.io/) 格式化工具，它为我节省了很多时间，不用过多的去关心代码格式，并在多个项目中保持一致性。Prettier 做了很多硬性的风格决策，仅提供最小的配置接口，这使得它非常易于使用。
 
-## 123
+## TTT
 
 > Prettier 是一个固执己见的代码格式化程序。它通过解析您的代码并使用自己的规则重新打印它来执行一致的样式，这些规则考虑了最大行长度，并在必要时包装代码。
 
