@@ -4,6 +4,20 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
   ],
   devtools: { enabled: true },
+  app: {
+    head: {
+      title: 'Starlong',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Starlong\'s personal website' },
+        { name: 'author', content: 'Starlong Lu' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+      ],
+    },
+  },
   eslint: {
     config: {
       stylistic: {
