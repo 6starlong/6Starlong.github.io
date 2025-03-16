@@ -29,12 +29,6 @@ function handleTypingEffect(typingElements, contactCommandLine, contactCommand, 
     const children = Array.from(element.children)
     let delay = 0
 
-    // 初始化所有子元素为隐藏状态
-    children.forEach((child) => {
-      child.style.opacity = '0'
-      child.style.display = 'block'
-    })
-
     // 逐个显示子元素
     children.forEach((child, index) => {
       setTimeout(() => {
@@ -270,6 +264,7 @@ body {
 .typing-effect h1, .typing-effect p {
   transition: opacity 0.5s ease;
   margin: 0;
+  opacity: 0;
 }
 
 .typing-effect h1 {
